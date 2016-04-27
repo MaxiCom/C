@@ -1,5 +1,5 @@
 # C Programming
 
-Quelques exercices en C.
+Quelques programmes en C.
 
 Compilateur: gcc
