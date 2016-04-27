@@ -1,31 +1,25 @@
 #include "wake_on_lan.h"
 
-void	display_help(char *binary_name)
+int		display_help(char *binary_name)
 {
 	printf("usage: %s MAC_ADDRESS\n", binary_name);
+	return (-1);
 }
 
-int	create_socket(t_socket *t_socket, char *argv[])
+int		quit_with_prompt(char *message)
 {
-	if ((t_socket->socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
-		return (-1);
-	
-	memset((char *)&(t_socket->socket_server), 0, sizeof(t_socket->socket_server));
-	t_socket->socket_server.sin_family = AF_INET;
-	t_socket->socket_server.sin_port = htons(9);
-
-	if (inet_aton(argv[1], &(t_socket->socket_server)) == 0)
-		return (-1);
-
-	return (0);
+	printf("%s", message);
+	return (-1);
 }
+
 
 int		main(int argc, char *argv[])
 {
 	t_socket	t_socket;
 
 	if (check_args(argc, argv) != 0)
-		display_help(argv[0]);
-	create_socket(&t_socket, argv);
+		return (display_help(argv[0]));
+	if (create_socket(&t_socket) != 0)
+		return (quit_with_prompt("failed to create socket"));	
 	return (0);
 }

@@ -3,8 +3,9 @@ CC = gcc
 CC_FLAGS = -Wall -Wextra -Werror
 
 # SOURCE VARS
-SRC = src/wake_on_lan.c \
-		src/args/check_args.c
+SRC =	src/wake_on_lan.c \
+		src/args/check_args.c \
+		src/socket/manage_socket.c
 
 # INCLUDE VARS
 INCLUDE_PATH = include/
