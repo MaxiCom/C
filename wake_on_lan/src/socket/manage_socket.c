@@ -22,6 +22,6 @@ int		send_magic_packet(t_socket *t_socket, char *mac_addr)
 
 	(void)mac_addr;
 	while (++first_loop <= 5)
-		sendto(t_socket->socket, ff, sizeof (ff), 0, (struct sockaddr *)&(t_socket->socket_server), sizeof(t_socket->socket_server));
+		sendto(t_socket->socket, ff, 2, 0, (struct sockaddr *)&(t_socket->socket_server), sizeof(t_socket->socket_server));
 	return (0);
 }
