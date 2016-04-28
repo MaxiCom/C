@@ -2,14 +2,26 @@
 
 int		create_socket(t_socket *t_socket)
 {
-	if ((t_socket->socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
-		return (-1);
+	int broadcastEnable=1;
 	
-	memset((char *)&(t_socket->socket_server), 0, sizeof(t_socket->socket_server));
-	t_socket->socket_server.sin_family = AF_INET;
-	t_socket->socket_server.sin_port = htons(9);
+	/*
+		Create a socket 
+			AF_INET = ipv4 format
+			SOCK_DGRAM = Connectionless packet
+			IPPROTO_UDP = protocol udp
+	*/
+	if ((t_socket->client = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+		return (-1);
+	//Enable broadcast	
+	setsockopt(t_socket->client, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, \
+		sizeof(broadcastEnable));	
 
-	if (inet_aton("192.168.1.14", &(t_socket->socket_server.sin_addr)) == 0)
+	memset((char *)&(t_socket->server), 0, sizeof(t_socket->server));
+	t_socket->server.sin_family = AF_INET;
+	t_socket->server.sin_port = htons(9);
+
+	//Convert socket_server into the server socket obviously
+	if (inet_aton("192.168.1.255", &(t_socket->server.sin_addr)) == 0)
 		return (-1);
 
 	return (0);
@@ -17,11 +29,10 @@ int		create_socket(t_socket *t_socket)
 
 int		send_magic_packet(t_socket *t_socket, char *mac_addr)
 {
-	int first_loop = -1;
-	char	*ff = "FF";
-
+	char *coucou = "coucou";
 	(void)mac_addr;
-	while (++first_loop <= 5)
-		sendto(t_socket->socket, ff, 2, 0, (struct sockaddr *)&(t_socket->socket_server), sizeof(t_socket->socket_server));
+
+	sendto(t_socket->client, coucou, 6, 0, (struct sockaddr *)&(t_socket->server), \
+		sizeof(t_socket->server));
 	return (0);
 }

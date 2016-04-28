@@ -22,6 +22,6 @@ int		main(int argc, char *argv[])
 		return (quit_with_prompt("failed to create socket"));	
 	if (send_magic_packet(&t_socket, argv[1]) != 0)
 		return (quit_with_prompt("failed to send magic packet"));
-	close(t_socket.socket);
+	close(t_socket.client);
 	return (0);
 }

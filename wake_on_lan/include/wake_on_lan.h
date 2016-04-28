@@ -11,8 +11,8 @@
 
 typedef	struct			s_socket
 {
-	struct sockaddr_in	socket_server;
-	int					socket;
+	struct sockaddr_in	server;
+	int					client;
 }						t_socket;
 
 //ARGS
