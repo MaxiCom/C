@@ -29,10 +29,25 @@ int		create_socket(t_socket *t_socket)
 
 int		send_magic_packet(t_socket *t_socket, char *mac_addr)
 {
-	char *coucou = "coucou";
-	(void)mac_addr;
+	char			tosend[102];
+	unsigned int	int_mac_array[6];
+	char		mac_array[6];
+	int			index;
 
-	sendto(t_socket->client, coucou, 6, 0, (struct sockaddr *)&(t_socket->server), \
+	if (sscanf(mac_addr, "%x:%x:%x:%x:%x:%x", &int_mac_array[0], \
+		&int_mac_array[1], &int_mac_array[2], &int_mac_array[3], \
+			&int_mac_array[4], &int_mac_array[5]) < 6)
+		return (-1);
+	for (index = 0; index < 6; index++) {
+		mac_array[index] = (unsigned char)int_mac_array[index];
+	}
+	for(index = 0; i < 6; i++) {
+		tosend[i] = 0xFF;
+	}
+	for(index = 1; i <= 16; i++) {
+		memcpy(&tosend[i * 6], &mac_array, 6 * sizeof(unsigned char));
+	}
+	sendto(t_socket->client, tosend, 102, 0, (struct sockaddr *)&(t_socket->server), \
 		sizeof(t_socket->server));
 	return (0);
 }
