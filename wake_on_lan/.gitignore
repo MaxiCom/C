@@ -1,3 +1,3 @@
 todo
-bin/
 bin/*
+.gitignore
