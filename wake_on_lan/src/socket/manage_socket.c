@@ -4,14 +4,9 @@ int		create_socket(t_socket *t_socket)
 {
 	int broadcastEnable=1;
 	
-	/*
-		Create a socket 
-			AF_INET = ipv4 format
-			SOCK_DGRAM = Connectionless packet
-			IPPROTO_UDP = protocol udp
-	*/
 	if ((t_socket->client = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
 		return (-1);
+	
 	//Enable broadcast	
 	setsockopt(t_socket->client, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, \
 		sizeof(broadcastEnable));	
@@ -47,7 +42,8 @@ int		send_magic_packet(t_socket *t_socket, char *mac_addr)
 	for(index = 1; index <= 16; index++) {
 		memcpy(&tosend[index * 6], &mac_array, 6 * sizeof(unsigned char));
 	}
-	sendto(t_socket->client, tosend, 102, 0, (struct sockaddr *)&(t_socket->server), \
-		sizeof(t_socket->server));
+	if (sendto(t_socket->client, tosend, 102, 0, \
+		(struct sockaddr *)&(t_socket->server), sizeof(t_socket->server)) < 0)
+		return (-1);
 	return (0);
 }
