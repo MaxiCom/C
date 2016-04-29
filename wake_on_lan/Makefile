@@ -15,6 +15,7 @@ NAME = Wake_on_lan
 BIN_PATH = bin/
 
 all:
+	mkdir $(BIN_PATH)
 	$(CC) $(CC_FLAGS) -o $(BIN_PATH)$(NAME) -I$(INCLUDE_PATH) $(SRC)
 
 clean:

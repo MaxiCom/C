@@ -18,7 +18,6 @@ int		create_socket(t_socket *t_socket)
 	//Convert socket_server into the server socket obviously
 	if (inet_aton("192.168.1.255", &(t_socket->server.sin_addr)) == 0)
 		return (-1);
-
 	return (0);
 }
 
