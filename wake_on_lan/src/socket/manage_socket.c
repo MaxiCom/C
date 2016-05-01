@@ -31,11 +31,9 @@ int		send_magic_packet(t_socket *t_socket, char *mac_addr)
 	if (sscanf(mac_addr, "%x:%x:%x:%x:%x:%x", &int_mac_array[0], \
 		&int_mac_array[1], &int_mac_array[2], &int_mac_array[3], \
 			&int_mac_array[4], &int_mac_array[5]) < 6)
-		return (-1);	
+				return (-1);	
 	for (index = 0; index < 6; index++) {
 		mac_array[index] = (unsigned char)int_mac_array[index];
-	}
-	for(index = 0; index < 6; index++) {
 		tosend[index] = 0xFF;
 	}
 	for(index = 1; index <= 16; index++) {
@@ -43,6 +41,6 @@ int		send_magic_packet(t_socket *t_socket, char *mac_addr)
 	}
 	if (sendto(t_socket->client, tosend, 102, 0, \
 		(struct sockaddr *)&(t_socket->server), sizeof(t_socket->server)) < 0)
-		return (-1);
+			return (-1);
 	return (0);
 }
