@@ -17,7 +17,7 @@ int		is_mac_address(char *mac_addr)
 
 int		check_args(int argc, char *argv[])
 {
-	if (argc != 2 || is_mac_address(argv[1]) != 1)
+	if (argc != 2 || is_mac_address(argv[1]) != 0)
 		return (-1);	
 	return (0);
 }

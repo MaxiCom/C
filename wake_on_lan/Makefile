@@ -20,5 +20,6 @@ all:
 
 clean:
 	rm -f $(BIN_PATH)$(NAME)
+	rmdir $(BIN_PATH)
 
 re: clean all
