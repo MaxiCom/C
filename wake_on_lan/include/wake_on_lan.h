@@ -1,5 +1,5 @@
-#ifndef _DEF_WAKE_ON_LAN_H_
-# define _DEF_WAKE_ON_LAN_H
+#ifndef __WAKE_ON_LAN_H__
+# define __WAKE_ON_LAN_H__
 
 # include <string.h>
 # include <stdio.h>
