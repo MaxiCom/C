@@ -14,13 +14,13 @@ typedef	struct			s_socket
 {
 	struct sockaddr_in	server;
 	int					client;
-}						t_socket;
+}    					t_socket;
 
 //ARGS
-int						check_args(int, char *[]);
+int	check_args(int, char *[]);
 
 //SOCKET
-int						create_socket(t_socket *);
-int						send_magic_packet(t_socket *, char *);
+int	create_socket(t_socket *);
+int	send_magic_packet(t_socket *, char *);
 
 #endif
